@@ -22,34 +22,23 @@ public class BankAccount
       if (loggedIn == true)
       return balance;
       else
-        throw new IllegalStateException();
+        throw new IllegalStateException("Not logged in");
     }
     public void logOut()
     {
       loggedIn = false;
       
     }
-    public double deposit(double amount)
+    public double deposit(double despositAmount)
     {
       if (loggedIn == true)
       {
-        if (amount > 0)
-          balance += amount;
+        if (despositAmount > 0)
+          balance += despositAmount;
         return balance;
       }
       else
-        throw new IllegalStateException();
-    }
-
-
-
-
-
-    public static void main(String[]args)
-    {
-      BankAccount account1  = new BankAccount("Checkin", 1111, 1000, "password");
-      account1.logIn("password");
-      System.out.println(account1.getBalance());
+        throw new IllegalStateException("not logged in");
     }
     public void logIn(String password)
     {
@@ -58,5 +47,30 @@ public class BankAccount
         loggedIn = true;
       }
     }
+    public double withdraw(double withdrawAmount)
+    {
+      if (loggedIn == true)
+      {
+        if (withdrawAmount > 0)
+          balance -= withdrawAmount;
+        return balance;
+      }
+      else
+        throw new IllegalStateException("Not logged in");
+    }
     
+
+
+
+
+    public static void main(String[]args)
+    {
+      BankAccount account1  = new BankAccount("Checking", 1111, 1000, "password");
+      account1.logIn("password");
+      System.out.println(account1.getBalance());
+      System.out.println(account1.deposit(500));
+      System.out.println(account1.withdraw(1000));
+    }
   }
+    
+   
